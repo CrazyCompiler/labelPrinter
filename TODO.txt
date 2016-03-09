@@ -1,0 +1,44 @@
+
+Given:
+    - CSV File (format firstName,lastName,gender,age,city,state,country).
+
+Requirement:
+
+    Honorific for names:
+     - Male: Mr
+     - Female: Ms
+
+    First addressing format:
+        - Mr/Ms firstName lastName
+
+    Second addressing format:
+       - Mr/Ms lastName,firstName
+
+Usage: -
+
+    java labelPrinter -f records.txt
+     - ./labelPrinter_firstLast
+
+    java labelPrinter -l records.txt
+     - ./labelPrinter_lastFirst
+
+    java labelPrinter -l -cBangaladesh records.txt
+
+    java labelPrinter -l -cBangaladesh -a_above_20 records.txt
+
+
+Entities:
+    Guest
+    Name
+    Age
+    Gender
+    Address
+    NamingConventionCreator
+    Representor
+
+
+Packages:
+    guest: Name,Age,Gender,Address,Guest
+    namingConvention: NaminingConventionCreator
+    representors:Representor
+
