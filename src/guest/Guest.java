@@ -1,5 +1,6 @@
 package guest;
 
+import designs.Designs;
 import guest.address.City;
 import guest.address.Country;
 import guest.address.State;
@@ -27,48 +28,31 @@ public class Guest {
         this.country = country;
     }
 
-    private void updateGuestEntries(){
-        this.guestEntities.put("age",this.age);
-        this.guestEntities.put("city",this.city);
-        this.guestEntities.put("state",this.state);
-        this.guestEntities.put("country",this.country);
+    private void updateGuestEntries() {
+        this.guestEntities.put("city", this.city);
+        this.guestEntities.put("state", this.state);
+        this.guestEntities.put("country", this.country);
     }
 
-    private String horizontalLineCreator(int length,String[] borderSymbols){
-        String line = borderSymbols[1];
-        for (int index=0;index<length-2;index++){
-            line += borderSymbols[0];
-        }
-        line += borderSymbols[1];
-        return line;
-    }
-
-    public String getRepresentation(String nameRepresentationFormat, String entitiesRepresentationFormat,String[] borderSymbols) {
+    public String getRepresentation(String nameRepresentationFormat, String entitiesRepresentationFormat, Designs design) {
         updateGuestEntries();
-        String representataion = "";
         NamingConventionGenerator namingConvention = new NamingConventionGenerator(nameRepresentationFormat);
-        String nameRepresentation = name.getRepresentation(namingConvention,this.gender.getHonorific());
-
+        String nameRepresentation = name.getRepresentation(namingConvention, this.gender.getHonorific());
         EntityRepresentor entityRepresentor = new EntityRepresentor(entitiesRepresentationFormat);
-        String entityRepresentation = entityRepresentor.getRepresentation(this.guestEntities) +"|";
-        int lineLength = entityRepresentation.split("\n")[0].length();
-        String horizontalLine = horizontalLineCreator(lineLength,borderSymbols);
-        representataion = horizontalLine+"\n"+nameRepresentation+"\n"+horizontalLine+"\n"+entityRepresentation+"\n"+horizontalLine;
-        return representataion;
+        String entityRepresentation = entityRepresentor.getRepresentation(this.guestEntities);
+        return design.getRepresentation(nameRepresentation, entityRepresentation);
     }
 
     public boolean isEligible(String[] filters) {
-        HashMap <String,Testables>elements = new HashMap();
-        elements.put("country",this.country);
-        elements.put("age",this.age);
-        boolean result = true;
+        HashMap<String, Testables> elements = new HashMap();
+        elements.put("country", this.country);
+        elements.put("age", this.age);
         for (String filter : filters) {
-            String element = filter.substring(0,filter.indexOf("_"));
-            String data = filter.substring(filter.indexOf("_")+1);
-            if((elements.get(element)).test(data) && result == true);
-            result = (elements.get(element)).test(data);
+            String element = filter.substring(0, filter.indexOf("_"));
+            if (!(elements.get(element)).test(filter))
+                return false;
         }
-        return result;
+        return true;
     }
 
     @Override
@@ -77,7 +61,7 @@ public class Guest {
             return super.equals(obj);
         Guest guest = (Guest) obj;
 
-        return ((this.name.equals(guest.name))&&
+        return ((this.name.equals(guest.name)) &&
                 (this.gender.equals(guest.gender)) &&
                 (this.age.equals(guest.age))
                 && (this.country.equals(guest.country)));

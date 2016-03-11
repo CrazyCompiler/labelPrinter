@@ -10,7 +10,8 @@ public class Country implements Testables, TextRepresentors {
         this.country = country;
     }
 
-    public boolean test(String country) {
+    public boolean test(String data) {
+        String country = data.split("_")[1];
         return this.country.equals(country);
     }
 

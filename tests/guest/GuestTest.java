@@ -1,5 +1,7 @@
 package guest;
 
+import designs.Designs;
+import designs.FirstDesign;
 import guest.address.City;
 import guest.address.Country;
 import guest.address.State;
@@ -8,6 +10,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class GuestTest {
     Guest guest;
@@ -16,13 +19,13 @@ public class GuestTest {
     public void setUp() throws Exception {
         String firstName = "Julius";
         String lastName = "Barrows";
-        Name name = new Name(firstName,lastName);
+        Name name = new Name(firstName, lastName);
         Country country = new Country("Macedonia");
         Age age = new Age(18);
         Gender gender = new Gender("Female");
         City city = new City("Veda haven");
         State state = new State("Vermont");
-        guest = new Guest(name,age,gender,city,state,country);
+        guest = new Guest(name, age, gender, city, state, country);
     }
 
 
@@ -51,12 +54,18 @@ public class GuestTest {
 
     @Test
     public void testGetRepresentation_provides_name_representation_formally_with_age_and_country_filters() {
-        String[] entries = {"country","age"};
+        String[] entries = {"country", "age"};
         String expectedRepresentation = "Ms Julius Barrows, Macedonia, 18";
-        String nameRepresentation = "|_honorific_lastName_,_firstName";
-        String entityRepresentation = "|_space_city_delimiter_space_state_space_|_lineSeparator_|_space_country";
-        String[] borderSymbol = {"-","+"};
-        System.out.println(guest.getRepresentation(nameRepresentation,entityRepresentation,borderSymbol));
-//        assertEquals(expectedRepresentation,guest.getRepresentation("firstName_lastName",entries));
+        String nameRepresentation = "honorific_lastName_,_firstName";
+        String entityRepresentation = "space_city_delimiter_space_state_space_lineSeparator_space_country";
+        String[] borderSymbol = {"-", "+"};
+        Designs design = new FirstDesign();
+        String expected = "+---------------------+\n" +
+                "| Ms Barrows, Julius  |\n" +
+                "+---------------------+\n" +
+                "| Veda haven, Vermont |\n" +
+                "| Macedonia           |\n" +
+                "+---------------------+\n";
+        assertEquals(expected, guest.getRepresentation(nameRepresentation, entityRepresentation, design));
     }
 }

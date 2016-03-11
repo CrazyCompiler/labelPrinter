@@ -28,9 +28,8 @@ public class labelPrinter {
         GuestListCreator guestListCreator = new GuestListCreator(data);
         ArrayList<Guest> guests = guestListCreator.getList();
         Filter filter = new Filter(filters);
-        System.out.println(filters[0]+" "+filters[1]);
         ArrayList<Guest> filteredGuestList = filter.getFilteredList(guests);
         Representative representation = new Representative(filteredGuestList);
-        System.out.println(representation.getRepresentation(option, filters));
+        System.out.println(representation.getRepresentation(option));
     }
 }

@@ -1,5 +1,7 @@
 package representors;
 
+import designs.Designs;
+import designs.FirstDesign;
 import guest.Guest;
 
 import java.util.ArrayList;
@@ -20,16 +22,18 @@ public class Representative {
         return line;
     }
 
-    public String getRepresentation(String option, String[] filters) {
+    public String getRepresentation(String option) {
         String representation = "";
         HashMap namingConventions = new HashMap();
-        namingConventions.put("-f", "firstName_lastName");
-        namingConventions.put("-l", "lastName_,_firstName");
+        namingConventions.put("-f", "honorific_firstName_lastName");
+        namingConventions.put("-l", "honorific_lastName_,_firstName");
+        String entityRepresentation = "space_city_delimiter_space_state_space_lineSeparator_space_country";
+        Designs design = new FirstDesign();
+
 
         for (int index = 0; index < this.guests.size(); index++) {
             if (namingConventions.containsKey(option)) {
-//                representation += this.guests.get(index).getRepresentation((String)namingConventions.get(option),filters)+"\n";
-
+                representation += this.guests.get(index).getRepresentation((String)namingConventions.get(option),entityRepresentation,design)+"\n";
             } else
                 representation = "Wrong input";
         }
