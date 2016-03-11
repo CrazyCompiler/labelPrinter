@@ -12,8 +12,8 @@ public class Name {
         this.lastName = lastName;
     }
 
-    public String getRepresentation(NamingConventionGenerator convention) {
-        return convention.getRepresentation(this.firstName, this.lastName);
+    public String getRepresentation(NamingConventionGenerator convention,String honorofic) {
+        return convention.getRepresentation(this.firstName, this.lastName,honorofic);
     }
 
     @Override

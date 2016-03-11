@@ -1,6 +1,9 @@
-package guest;
+package guest.address;
 
-public class Country implements Testables{
+import guest.Testables;
+import representors.TextRepresentors;
+
+public class Country implements Testables, TextRepresentors {
     private String country;
 
     public Country(String country) {
@@ -11,6 +14,9 @@ public class Country implements Testables{
         return this.country.equals(country);
     }
 
+    public String toText() {
+        return country;
+    }
 
     @Override
     public boolean equals(Object o) {

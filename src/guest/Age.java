@@ -1,8 +1,10 @@
 package guest;
 
+import representors.TextRepresentors;
+
 import java.util.HashMap;
 
-public class Age implements Testables {
+public class Age implements Testables, TextRepresentors {
     private int age;
 
     public Age(int age) {
@@ -18,6 +20,10 @@ public class Age implements Testables {
         choices.put("bellow", threshHold > this.age);
         choices.put("equal", threshHold == this.age);
         return choices.get(expression);
+    }
+
+    public String toText() {
+        return age+"";
     }
 
     @Override

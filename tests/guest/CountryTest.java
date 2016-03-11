@@ -1,5 +1,6 @@
 package guest;
 
+import guest.address.Country;
 import org.junit.Before;
 import org.junit.Test;
 

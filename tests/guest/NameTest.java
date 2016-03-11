@@ -3,7 +3,7 @@ package guest;
 import org.junit.Test;
 import representors.NamingConventionGenerator;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class NameTest {
     @Test
@@ -11,8 +11,9 @@ public class NameTest {
         String firstName = "Rodolfo";
         String secondName = "Balistreri";
         Name name = new Name(firstName,secondName);
-        NamingConventionGenerator convention= new NamingConventionGenerator("firstName_lastName");
-        String expectedOutput = " Rodolfo Balistreri";
-        assertTrue(expectedOutput.equals(name.getRepresentation(convention)));
+        NamingConventionGenerator convention= new NamingConventionGenerator("honorific_firstName_lastName");
+        String expectedOutput = " Mr Rodolfo Balistreri";
+        String honorific = "Mr";
+        assertEquals(expectedOutput,name.getRepresentation(convention,honorific));
     }
 }

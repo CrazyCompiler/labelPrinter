@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class labelPrinter {
     public static void main(String[] args) throws IOException {
@@ -25,10 +26,10 @@ public class labelPrinter {
                 data += (char) inputStream.read();
         }
         GuestListCreator guestListCreator = new GuestListCreator(data);
-        Guest[] guests = guestListCreator.getList();
+        ArrayList<Guest> guests = guestListCreator.getList();
         Filter filter = new Filter(filters);
         System.out.println(filters[0]+" "+filters[1]);
-        Guest[] filteredGuestList = filter.getFilteredList(guests);
+        ArrayList<Guest> filteredGuestList = filter.getFilteredList(guests);
         Representative representation = new Representative(filteredGuestList);
         System.out.println(representation.getRepresentation(option, filters));
     }

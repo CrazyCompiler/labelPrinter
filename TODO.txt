@@ -26,6 +26,23 @@ Usage: -
 
     java labelPrinter -l -cBangaladesh -a_above_20 records.txt
 
+output:
+
+    +----------------------+
+    | Mr John Smith        |
+    |----------------------|
+    | New Delhi, Karnataka |
+    | India                |
+    +----------------------+
+
+    +----------------------+
+    | Mr Smith, John       |
+    |----------------------|
+    | New Delhi, Karnataka |
+    | India                |
+    +----------------------+
+
+
 
 Entities:
     Guest
@@ -40,5 +57,5 @@ Entities:
 Packages:
     guest: Name,Age,Gender,Address,Guest
     namingConvention: NaminingConventionCreator
-    representors:Representor
+    representors:Representor,Honorofic,NamingConventionCreator,EntityRepresentor
 
