@@ -22,8 +22,6 @@ public class EntityRepresentor {
                 representation += elements.get(formatElement).toText();
             else if(this.textSeparators.containsKey(formatElement))
                 representation += this.textSeparators.get(formatElement).toText();
-            else
-                representation += formatElement;
         }
         return representation;
     }

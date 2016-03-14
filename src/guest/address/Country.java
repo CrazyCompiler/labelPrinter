@@ -11,8 +11,7 @@ public class Country implements Testables, TextRepresentors {
     }
 
     public boolean test(String data) {
-        String country = data.split("_")[1];
-        return this.country.equals(country);
+        return this.country.equals(data);
     }
 
     public String toText() {
@@ -30,8 +29,4 @@ public class Country implements Testables, TextRepresentors {
 
     }
 
-    @Override
-    public String toString() {
-        return "" + this.country;
-    }
 }

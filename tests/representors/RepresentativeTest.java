@@ -1,51 +1,51 @@
 package representors;
 
-public class RepresentativeTest {
-//    @Test
-//    public void testGetRepresentation_without_filters_first_name_last_name_convention() {
-//        String data = "Ola,Kreiger,Male,36,Katlynn view,Vermont,Romania\n" +
-//                "Rodolfo,Balistreri,Male,32,Crooks ton,Georgia,Bangladesh\n" +
-//                "Juana,Champlin,Female,26,West Shanna,Georgia,Bangladesh";
-//        GuestListCreator guestListCreator = new GuestListCreator(data);
-//
-//        String[] filters = new String[0];
-//        ArrayList<Guest> guests = guestListCreator.getList();
-//
-//        Representative representative = new Representative(guests);
-//        String expectedOutput = "Mr Ola Kreiger\n" +
-//                "Mr Rodolfo Balistreri\n" +
-//                "Ms Juana Champlin\n";
-//        assertTrue(expectedOutput.equals(representative.getRepresentation("-f",filters)));
-//    }
+import guest.Guest;
+import listManagers.GuestListCreator;
+import org.junit.Test;
 
-//    @Test
-//    public void testGetRepresentation_with_filters() {
-//        String data = "Ola,Kreiger,Male,36,Katlynn view,Vermont,Bangladesh\n" +
-//                "Rodolfo,Balistreri,Male,32,Crooks ton,Georgia,Bangladesh\n" +
-//                "Juana,Champlin,Female,26,West Shanna,Georgia,Bangladesh";
-//        GuestListCreator guestListCreator = new GuestListCreator(data);
-//
-//        String[] filters = {"country_Bangaladesh","age_20"};
-//        ArrayList<Guest> guests = guestListCreator.getList();
-//
-//        Representative representative = new Representative(guests);
-//        String expectedOutput = "Mr Ola Kreiger, Bangladesh, 36\n" +
-//                "Mr Rodolfo Balistreri, Bangladesh, 32\n" +
-//                "Ms Juana Champlin, Bangladesh, 26\n";
-//        assertEquals(expectedOutput,representative.getRepresentation("-f",filters));
-//    }
-//
-//
-//    @Test
-//    public void testGetRepresentationForWrongInput() {
-//        String data = "Mr Ola,Kreiger,Male,36,Katlynn view,Vermont,Bangladesh\n" +
-//                "Mr Rodolfo,Balistreri,Male,32,Crooks ton,Georgia,Bangladesh\n" +
-//                "Ms Juana,Champlin,Female,26,West Shanna,Georgia,Bangladesh\n";
-//        GuestListCreator guestListCreator = new GuestListCreator(data);
-//        String[] filters = {"country_Bangaladesh"};
-//        ArrayList<Guest> guests = guestListCreator.getList();
-//        Representative representative = new Representative(guests);
-//        String expectedOutput = "Wrong input";
-//        assertTrue(expectedOutput.equals(representative.getRepresentation("fl",filters)));
-//    }
+import java.util.ArrayList;
+
+import static junit.framework.TestCase.assertEquals;
+
+public class RepresentativeTest {
+    @Test
+    public void testGetRepresentation_without_filters_first_name_last_name_convention() {
+        String data = "Ola,Kreiger,Male,36,Katlynn view,Vermont,Romania\n" +
+                "Rodolfo,Balistreri,Male,32,Crooks ton,Georgia,Bangladesh\n";
+        GuestListCreator guestListCreator = new GuestListCreator(data);
+
+        ArrayList<Guest> guests = guestListCreator.getList();
+
+        Representative representative = new Representative(guests);
+        String expectedOutput = "+-----------------------+\n" +
+                "| Mr Ola Kreiger        |\n" +
+                "+-----------------------+\n" +
+                "| Katlynn view, Vermont |\n" +
+                "| Romania               |\n" +
+                "+-----------------------+\n" +
+                "\n" +
+                "+---------------------+\n" +
+                "| Mr Rodolfo Balistreri|\n" +
+                "+---------------------+\n" +
+                "| Crooks ton, Georgia |\n" +
+                "| Bangladesh          |\n" +
+                "+---------------------+\n" +
+                "\n";
+        assertEquals(expectedOutput, representative.getRepresentation("-f"));
+    }
+
+    @Test
+    public void testGetRepresentation_for_wrong_input() {
+        String data = "Ola,Kreiger,Male,36,Katlynn view,Vermont,Romania\n" +
+                "Rodolfo,Balistreri,Male,32,Crooks ton,Georgia,Bangladesh\n";
+        GuestListCreator guestListCreator = new GuestListCreator(data);
+
+        ArrayList<Guest> guests = guestListCreator.getList();
+
+        Representative representative = new Representative(guests);
+        String expectedOutput = "Wrong input";
+        assertEquals(expectedOutput, representative.getRepresentation("-cc"));
+    }
+
 }

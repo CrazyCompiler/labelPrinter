@@ -4,10 +4,7 @@ import guest.Guest;
 import listManagers.GuestListCreator;
 import representors.Representative;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class labelPrinter {
@@ -16,15 +13,8 @@ public class labelPrinter {
         String[] files = argumentSeperator.getFileNames();
         String option = argumentSeperator.getOption();
         String[] filters = argumentSeperator.getFilters();
-        String data = "";
-
-        for (int index = 0; index < files.length; index++) {
-            File csvData = new File(files[index]);
-            InputStream inputStream = new FileInputStream(csvData);
-            int size = inputStream.available();
-            for (int i = 0; i < size; i++)
-                data += (char) inputStream.read();
-        }
+        FileReader fileReader = new FileReader(files);
+        String data = fileReader.getData();
         GuestListCreator guestListCreator = new GuestListCreator(data);
         ArrayList<Guest> guests = guestListCreator.getList();
         Filter filter = new Filter(filters);

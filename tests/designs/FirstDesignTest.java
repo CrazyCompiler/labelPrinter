@@ -33,7 +33,7 @@ public class FirstDesignTest {
 
 
     @Test
-    public void testGetRepresentation() {
+    public void testGetRepresentation_for_size_of_country_smaller_than_city_and_state() {
         String nameRepresentationFormat = "honorific_lastName_,_firstName";
 
         NamingConventionGenerator namingConvention = new NamingConventionGenerator(nameRepresentationFormat);
@@ -51,6 +51,30 @@ public class FirstDesignTest {
                 "| Veda haven, Vermont |\n" +
                 "| Macedonia           |\n" +
                 "+---------------------+\n";
+        String result = design.getRepresentation(nameRepresentation, entityRepresentation);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetRepresentation_for_size_of_country_larger_than_city_and_state() {
+        String nameRepresentationFormat = "honorific_lastName_,_firstName";
+
+        NamingConventionGenerator namingConvention = new NamingConventionGenerator(nameRepresentationFormat);
+        String nameRepresentation = name.getRepresentation(namingConvention, gender.getHonorific());
+
+        String entitiesRepresentationFormat = "space_city_delimiter_lineSeparator_space_state_delimiter_country";
+        EntityRepresentor entityRepresentor = new EntityRepresentor(entitiesRepresentationFormat);
+        String entityRepresentation = entityRepresentor.getRepresentation(this.guestEntities);
+
+        String[] borderSymbols = {"-", "+"};
+        FirstDesign design = new FirstDesign();
+        String expected = "+------------------+\n" +
+                "| Ms Barrows, Julius|\n" +
+                "+------------------+\n" +
+                "| Veda haven,      |\n" +
+                "| Vermont,Macedonia|\n" +
+                "+------------------+\n";
         String result = design.getRepresentation(nameRepresentation, entityRepresentation);
 
         assertEquals(expected, result);

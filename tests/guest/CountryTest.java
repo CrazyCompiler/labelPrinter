@@ -16,6 +16,6 @@ public class CountryTest {
 
     @Test
     public void testHasSameCountry() {
-        assertTrue(country.test("country_Macedonia"));
+        assertTrue(country.test("Macedonia"));
     }
 }

@@ -49,7 +49,8 @@ public class Guest {
         elements.put("age", this.age);
         for (String filter : filters) {
             String element = filter.substring(0, filter.indexOf("_"));
-            if (!(elements.get(element)).test(filter))
+            String data = (String) filter.subSequence(filter.indexOf("_") + 1, filter.length());
+            if (!(elements.get(element)).test(data))
                 return false;
         }
         return true;

@@ -14,14 +14,6 @@ public class Representative {
         this.guests = guests;
     }
 
-    private String horizontalLineCreator(int length,String symbol){
-        String line = "";
-        for (int index=0;index<length;index++){
-            line += symbol;
-        }
-        return line;
-    }
-
     public String getRepresentation(String option) {
         String representation = "";
         HashMap namingConventions = new HashMap();
